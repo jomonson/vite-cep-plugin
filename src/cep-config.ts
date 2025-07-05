@@ -46,6 +46,7 @@ type CEF_Command =
   | "--mixed-context"
   | "--allow-file-access"
   | "--disable-popup-blocking"
+  | "--disable-web-security"
   | "--aggressive-cache-discard"
   | "--winhttp-proxy-resolver"
   | "--v=0"
