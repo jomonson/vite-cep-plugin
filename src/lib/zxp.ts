@@ -35,7 +35,13 @@ export const signZXP = async (
         await pause(100);
     }
 
-    execSync(signStr, {cwd: cwdDir, encoding: "utf-8"});
+    try {
+        execSync(signStr, {cwd: cwdDir, encoding: "utf-8"});
+    } catch (e) {
+        console.log(e);
+        log("failed to sign zxp", false);
+    }
+
     log("built zxp", true, output);
     return output;
 };
