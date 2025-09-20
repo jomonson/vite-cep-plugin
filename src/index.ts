@@ -58,7 +58,7 @@ const removeZeroByteFiles = async (dir: string)=> {
     if (dirent.isDirectory()) {
       await removeZeroByteFiles(res);
     } else {
-      if ((await fs.stat(res)).size == 0) {
+      if ((await fs.stat(res)).size == 0 || (dirent.name === '.DS_Store')) {
         await fs.unlink(res);
       }
     }
@@ -343,6 +343,7 @@ export const cep = (opts: CepOptions) => {
       }
 
       const input = path.join(dir, cepDist);
+      log(`Removing zero byte files in ${input}`, true);
       await removeZeroByteFiles(input);
       if (isPackage) {
         const zxpPath = await signZXP(
